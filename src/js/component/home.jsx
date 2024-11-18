@@ -32,21 +32,30 @@ const activatedLight = {
 }
 
 
-
+let timer = setInterval(()=>{}, 0);
 
 //create your first component
 const Home = () => {
 	const [ color, setColor ] = useState("none");
-	//const [ counter, setCounter ] = useState(0);
-	//const [timer, setTimer] = useState("0");
 	let colors = ["red", "yellow", "green"];
 	let counter = 0;
+
+	/* useEffect(() => {
+		setInterval(()=>{
+			setColor(colors[count]);
+			count > 2 ? setCount(0) : setCount(count + 1);
+	   }, 1000);
+	  }, [count]); */
 	
 	function intermitentLights() {
-		setInterval(()=>{
+		timer = setInterval(()=>{
 			setColor(colors[counter]);
 			counter > 2 ? counter = 0 : counter++;
 	   }, 1000);
+	}
+
+	function stopLights() {
+		clearInterval(timer);
 	}
 	
 
@@ -71,6 +80,7 @@ const Home = () => {
 		</div>
 		<div className="d-flex justify-content-center">
 			<button id = "traffButton" className = "mt-5" type = "button" style={{height:"50px", width: "200px"}} onClick={intermitentLights}>Intermitentes</button>
+			<button id = "traffButton" className = "mt-5" type = "button" style={{height:"50px", width: "200px"}} onClick={stopLights}>Parar</button>
 			
 		</div>
 		
